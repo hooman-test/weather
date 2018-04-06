@@ -1,9 +1,6 @@
 import {Component, Injectable, Input, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {City} from './city';
-import "rxjs/add/operator/map";
-import {Observable} from "rxjs/Observable";
-import {of} from 'rxjs/observable/of';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +11,9 @@ import {of} from 'rxjs/observable/of';
 @Injectable()
 export class AppComponent implements OnInit {
   http: HttpClient;
+  title = 'Weather Information';
+  url = 'http://api.openweathermap.org/data/2.5/weather?appid=c607d93e973983f09ff1b3121d21425c&units=metric';
+  wd = '';
 
   @Input()
   city: City = new City();
@@ -25,16 +25,12 @@ export class AppComponent implements OnInit {
   ngOnInit() {
   }
 
-  title = 'Weather Information';
-  url = 'http://api.openweathermap.org/data/2.5/weather?appid=c607d93e973983f09ff1b3121d21425c';
-  wd = '';
-
   showCityWeather() {
-    /*let query = this.url + "&q=" + this.city.name;
+    const query = this.url + '&q=' + this.city.name;
     console.log(query);
-    let cityWeather = this.http.get(query).map(res => res.json());
 
-    console.log(cityWeather);*/
+    const cityWeatherTemp = this.http.get(query).subscribe(
+      data => this.wd = data['main'].temp,
+      msg => console.log('observer error: ' + msg));
   }
-
 }
