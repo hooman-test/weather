@@ -1,0 +1,16 @@
+.quickView {
+  border: 1px solid #ccc;
+  margin: 20px 0;
+  padding: 10px;
+  width: 200px;
+  font-size: 14px;
+  color: #555;
+}
+
+.quickView .label {
+  font-size: 12px;
+}
+
+.quickView .value {
+  color: blue;
+}

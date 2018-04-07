@@ -20,8 +20,7 @@ export class WeatherLookupComponent implements OnInit {
   ngOnInit() {
   }
 
-  lookupCityWeather(city: City) {
-    console.log('comp');
+  lookupCityWeather(city: string) {
     this.ws.getWeatherByCity(city).subscribe(
       data => {
         this.wc = data['main'];

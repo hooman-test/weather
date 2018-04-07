@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {City} from './city';
 import {Observable} from 'rxjs/Observable';
 import {WeatherCondition} from './weatherCondition';
 
@@ -11,8 +10,8 @@ export class WeatherService {
   constructor(private http: HttpClient) {
   }
 
-  getWeatherByCity(city: City): Observable<WeatherCondition> {
-    const query = this.url + '&q=' + city.name;
+  getWeatherByCity(city: string): Observable<WeatherCondition> {
+    const query = this.url + '&q=' + city;
     console.log('query is: ' + query);
     return this.http.get<WeatherCondition>(query);
   }
