@@ -1,11 +1,7 @@
 <div style="text-align:center">
   <h1>
-    Welcome to {{ title }}!
+    {{title}}
   </h1>
 </div>
-City Name: <input type="text" [(ngModel)]="city.name"/>
-<button (click)='showCityWeather()'>Search</button>
 
-<div>
-  {{city.name}} weather is: {{wd}}
-</div>
+<app-weather-lookup></app-weather-lookup>

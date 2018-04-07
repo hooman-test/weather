@@ -1,3 +1,3 @@
 export class City {
-	name: string;
+  name: string;
 }
