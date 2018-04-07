@@ -1,10 +1,11 @@
 <h3>Weather Lookup</h3>
 <label>
-  <input #cityName placeholder="Type city name here">
+  <input #cityName placeholder="Type city name here" (keyup.enter)="lookupCityWeather(cityName.value)">
 </label>
 <button (click)="lookupCityWeather(cityName.value)">Search</button>
+<div class="error" *ngIf="errorMessage && !status">{{errorMessage}}</div>
 
-<div *ngIf="city.name">
+<div *ngIf="city.name && status">
   <div class="quickView">
     <h5 class="cityName">{{city.name}} Weather Info:</h5>
     <div><span class="label">Temp: </span><span class="value">{{wc.temp}}</span>&#8451;</div>

@@ -14,3 +14,8 @@
 .quickView .value {
   color: blue;
 }
+
+.error {
+  font-size: 12px;
+  color: red;
+}

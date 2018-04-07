@@ -13,6 +13,8 @@ export class WeatherLookupComponent implements OnInit {
   @Input()
   city: City = new City();
   wc: WeatherCondition = new WeatherCondition();
+  status: boolean;
+  errorMessage: string;
 
   constructor(private ws: WeatherService) {
   }
@@ -23,9 +25,14 @@ export class WeatherLookupComponent implements OnInit {
   lookupCityWeather(city: string) {
     this.ws.getWeatherByCity(city).subscribe(
       data => {
+        this.status = true;
         this.wc = data['main'];
         this.city.name = data['name'];
       },
-      msg => console.log('observer error: ' + msg));
+      res => {
+        this.status = false;
+        this.errorMessage = res.error.message;
+        console.log(res.error);
+      });
   }
 }
