@@ -1,0 +1,10 @@
+<h3>Quikly Lookup</h3>
+<label>
+  <input [(ngModel)]="city.name" placeholder="Type city name here">
+</label>
+<button (click)="lookupCityWeather(city)">Search</button>
+
+<div class="cityName">{{city.name}}</div>
+<div>Temp: {{wc.temp}}</div>
+<div>Max Temp: {{wc.temp_max}}</div>
+<div>Min Temp: {{wc.temp_min}}</div>
