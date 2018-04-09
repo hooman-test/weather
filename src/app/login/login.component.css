@@ -8,6 +8,12 @@
 form div {
   margin: 10px 0;
 }
+
+form label {
+  width: 80px;
+  display: inline-block;
+}
+
 .btn {
   width: 70px;
 }
