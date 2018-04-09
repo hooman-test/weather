@@ -1,0 +1,15 @@
+.mainContainer {
+  width: 960px;
+  border-right: 1px dashed #999999;
+  border-left: 1px dashed #999999;
+  margin: 0 auto;
+  background-color: #f5f5f5;
+  padding: 10px 10px 50px;
+}
+
+.section {
+  width: 47%;
+  display: inline-block;
+  margin: 0 10px;
+  vertical-align: top;
+}

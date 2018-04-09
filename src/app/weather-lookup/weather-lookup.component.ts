@@ -32,7 +32,6 @@ export class WeatherLookupComponent implements OnInit {
       res => {
         this.status = false;
         this.errorMessage = res.error.message;
-        console.log(res.error);
       });
   }
 }

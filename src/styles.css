@@ -1,8 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
 * {
   font-family: Verdana, serif;
+  font-size: 14px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }
 
 input {
   width: 200px;
+}
+
+h1 {
+  font-size: 26px;
+  margin: 0;
+  padding: 20px 10px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 22px;
+}
+
+h4 {
+  font-size: 20px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+h6 {
+  font-size: 16px;
 }

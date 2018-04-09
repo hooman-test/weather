@@ -1,0 +1,12 @@
+.container{
+  padding: 10px;
+  margin: 20px;
+  border: 1px solid #cccccc;
+}
+
+form div {
+  margin: 10px 0;
+}
+.btn {
+  width: 70px;
+}
