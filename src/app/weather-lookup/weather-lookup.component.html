@@ -1,8 +1,7 @@
 <h3>Weather Lookup</h3>
-<label>
-  <input #cityName placeholder="Type city name here" (keyup.enter)="lookupCityWeather(cityName.value)">
-</label>
-<button (click)="lookupCityWeather(cityName.value)">Search</button>
+
+<input type="text" #cityName placeholder="Type city name here" (keyup.enter)="lookupCityWeather(cityName.value)"/>
+<input type="button" (click)="lookupCityWeather(cityName.value)" value="Search"/>
 <div class="error" *ngIf="errorMessage && !status">{{errorMessage}}</div>
 
 <div *ngIf="city.name && status">

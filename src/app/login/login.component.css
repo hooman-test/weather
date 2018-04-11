@@ -1,4 +1,4 @@
-.container{
+.container {
   padding: 10px;
   margin: 20px;
   border: 1px solid #cccccc;
@@ -9,11 +9,16 @@ form div {
   margin: 10px 0;
 }
 
-form label {
-  width: 80px;
+form label span {
   display: inline-block;
+  width: 100px;
 }
 
-.btn {
-  width: 70px;
+div.buttonContainer {
+  text-align: right;
+  padding-right: 78px;
+}
+
+div.buttonContainer div {
+  display: inline-block;
 }

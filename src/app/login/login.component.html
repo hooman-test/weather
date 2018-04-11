@@ -2,16 +2,22 @@
   <h3>Login</h3>
   <form action="/login">
     <div>
-      <label>Username:
+      <label>
+        <span>Username:</span>
         <input type="text" name="username">
       </label>
     </div>
     <div>
-      <label>Password:
+      <label>
+        <span>Password:</span>
         <input type="password" name="password">
       </label>
     </div>
-    <input type="submit" class="btn" value="Login">
-    <input type="button" class="btn" value="Register" routerLink="/register"/>
+    <div class="buttonContainer">
+      <div>
+        <input type="button" value="Register" routerLink="/register"/>
+        <input type="submit" value="Login">
+      </div>
+    </div>
   </form>
 </div>

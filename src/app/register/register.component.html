@@ -1,18 +1,29 @@
-<h1>User Registration</h1>
+<div class="formContainer">
+  <h1>User Registration</h1>
 
-<form action="register.component.ts">
-  <label>Name:
-    <input type="text" name="name">
-  </label>
-  <label>Username:
-    <input type="text" name="username">
-  </label>
-  <label>Password:
-    <input type="password" name="password">
-  </label>
-  <label>Confirm Password:
-    <input type="password" name="confirm">
-  </label>
-  <input type="submit" value="Sign Up">
-  <button (click)="goBack();">Return</button>
-</form>
+  <form action="register.component.ts">
+    <label>
+      <span>Name:</span>
+      <input type="text" name="name">
+    </label>
+    <label>
+      <span>Username:</span>
+      <input type="text" name="username">
+    </label>
+    <label>
+      <span>Password:</span>
+      <input type="password" name="password">
+    </label>
+    <label>
+      <span>Confirm Password:</span>
+      <input type="password" name="confirm">
+    </label>
+    <div class="buttonContainer">
+      <div>
+        <input type="button" (click)="goBack();" value="Return"/>
+        <input type="submit" value="Sign Up">
+      </div>
+    </div>
+
+  </form>
+</div>
