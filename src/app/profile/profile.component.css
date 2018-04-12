@@ -1,0 +1,10 @@
+.cityContainer {
+  display: inline-block;
+  width: 400px;
+}
+.section {
+  border: 1px solid #cccccc;
+  background-color: white;
+  padding: 0 20px 10px;
+  margin: 10px 0;
+}

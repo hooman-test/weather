@@ -23,8 +23,8 @@ export class WeatherLookupComponent implements OnInit {
       data => {
         this.status = true;
         this.cityWeatherDto = new CityWeatherDto();
-        this.cityWeatherDto.weatherInfo = data['main'];
-        this.cityWeatherDto.cityName = data['name'];
+        this.cityWeatherDto.main = data['main'];
+        this.cityWeatherDto.name = data['name'];
       },
       res => {
         this.status = false;

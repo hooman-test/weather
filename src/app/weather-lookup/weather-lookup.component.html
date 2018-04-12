@@ -6,15 +6,15 @@
 
 <div *ngIf="status">
   <div class="quickView">
-    <h5 class="cityName">{{cityWeatherDto.cityName}} Weather Info:</h5>
+    <h5 class="cityName">{{cityWeatherDto.name}} Weather Info:</h5>
     <div>
-      <span class="label">Temp: </span><span class="value">{{cityWeatherDto.weatherInfo.temp}}</span>&#8451;
+      <span class="label">Temp: </span><span class="value">{{cityWeatherDto.main.temp}}</span>&#8451;
     </div>
     <div>
-      <span class="label">Max Temp: </span><span class="value">{{cityWeatherDto.weatherInfo.temp_max}}</span>&#8451;
+      <span class="label">Max Temp: </span><span class="value">{{cityWeatherDto.main.temp_max}}</span>&#8451;
     </div>
     <div>
-      <span class="label">Min Temp: </span><span class="value">{{cityWeatherDto.weatherInfo.temp_min}}</span>&#8451;
+      <span class="label">Min Temp: </span><span class="value">{{cityWeatherDto.main.temp_min}}</span>&#8451;
     </div>
   </div>
 </div>

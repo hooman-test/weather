@@ -1,0 +1,15 @@
+<h3>Welcome {{username}}</h3>
+<div class="cityContainer">
+  <div *ngFor="let item of cityWeatherDtos" class="section">
+    <h5 class="cityName">{{item.name}} Weather Info:</h5>
+    <div>
+      <span class="label">Temp: </span><span class="value">{{item.main.temp}}</span>&#8451;
+    </div>
+    <div>
+      <span class="label">Max Temp: </span><span class="value">{{item.main.temp_max}}</span>&#8451;
+    </div>
+    <div>
+      <span class="label">Min Temp: </span><span class="value">{{item.main.temp_min}}</span>&#8451;
+    </div>
+  </div>
+</div>

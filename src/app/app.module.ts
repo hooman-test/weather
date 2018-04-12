@@ -7,9 +7,10 @@ import {HttpClientModule} from '@angular/common/http';
 import {WeatherLookupComponent} from './weather-lookup/weather-lookup.component';
 import {WeatherService} from './weather.service';
 import {LoginComponent} from './login/login.component';
-import {AppRoutingModule} from './/app-routing.module';
+import {AppRoutingModule} from './app-routing.module';
 import {RegisterComponent} from './register/register.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
+import {ProfileComponent} from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {DashboardComponent} from './dashboard/dashboard.component';
     WeatherLookupComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent
+    DashboardComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
