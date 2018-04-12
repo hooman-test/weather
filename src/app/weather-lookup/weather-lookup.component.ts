@@ -1,7 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {City} from '../city';
+import {Component, OnInit} from '@angular/core';
 import {WeatherService} from '../weather.service';
-import {WeatherCondition} from '../weatherCondition';
+import {CityWeatherDto} from '../cityWeatherDto';
 
 @Component({
   selector: 'app-weather-lookup',
@@ -9,12 +8,9 @@ import {WeatherCondition} from '../weatherCondition';
   styleUrls: ['./weather-lookup.component.css']
 })
 export class WeatherLookupComponent implements OnInit {
-
-  @Input()
-  city: City = new City();
-  wc: WeatherCondition = new WeatherCondition();
   status: boolean;
   errorMessage: string;
+  cityWeatherDto: CityWeatherDto;
 
   constructor(private ws: WeatherService) {
   }
@@ -26,8 +22,9 @@ export class WeatherLookupComponent implements OnInit {
     this.ws.getWeatherByCity(city).subscribe(
       data => {
         this.status = true;
-        this.wc = data['main'];
-        this.city.name = data['name'];
+        this.cityWeatherDto = new CityWeatherDto();
+        this.cityWeatherDto.weatherInfo = data['main'];
+        this.cityWeatherDto.cityName = data['name'];
       },
       res => {
         this.status = false;
