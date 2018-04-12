@@ -1,7 +1,7 @@
-<h3>Welcome {{username}}</h3>
+<h4>Welcome {{username}}</h4>
 <div class="cityContainer">
   <div *ngFor="let item of cityWeatherDtos" class="section">
-    <h5 class="cityName">{{item.name}} Weather Info:</h5>
+    <h5 class="cityName">{{item.name}}:</h5>
     <div>
       <span class="label">Temp: </span><span class="value">{{item.main.temp}}</span>&#8451;
     </div>
