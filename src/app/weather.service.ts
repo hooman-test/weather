@@ -22,7 +22,7 @@ export class WeatherService {
     let ids = '';
     cityIds.forEach(x => ids += x + ',');
     ids = ids.substring(0, ids.length - 1); // Removing last comma
-    const query = this.group_url + '&id=' + ids;
-    return this.http.get<CityWeatherDto[]>(query);
+    const url = this.group_url + '&id=' + ids;
+    return this.http.get<CityWeatherDto[]>(url);
   }
 }

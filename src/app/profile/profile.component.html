@@ -1,5 +1,6 @@
 <h4>Welcome {{username}}</h4>
-<div class="cityContainer">
+<h5>City List</h5>
+<div class="sectionWrapper">
   <div *ngFor="let item of cityWeatherDtos" class="section">
     <h5 class="cityName">{{item.name}}:</h5>
     <div>
@@ -11,5 +12,16 @@
     <div>
       <span class="label">Min Temp: </span><span class="value">{{item.main.temp_min}}</span>&#8451;
     </div>
+    <button (click)="deleteCity(item.id)">X</button>
   </div>
+</div>
+
+<div class="sectionWrapper section">
+  <h5>Add City</h5>
+  <form>
+    <label>
+      <input type="text" name="cityName" #cityName>
+    </label>
+    <input type="submit" value="Add" (click)="addCity(cityName.value)">
+  </form>
 </div>

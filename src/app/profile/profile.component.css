@@ -1,6 +1,7 @@
-.cityContainer {
-  display: inline-block;
-  width: 50%;
+.sectionWrapper {
+  display: inline-grid;
+  width: 46%;
+
 }
 .section {
   border: 1px solid #cccccc;
