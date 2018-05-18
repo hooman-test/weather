@@ -50,17 +50,34 @@ app.post('/city', (req, res) => {
   })
 });
 
-app.options('/city', (req, res) => {
+app.delete('/city', (req, res) => {
   let city_id = req.query.cid;
-  console.log(city_id);
   connection.query('delete from city where user_id = 1 and id = ?', [city_id], (err, rows) => {
     if (err) throw err;
-    res.header({
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-    }).json(rows);
+    res.header({'Access-Control-Allow-Origin': '*'}).json(rows);
   })
+});
+
+app.post('/user', (req, res) => {
+  let name = req.body.name;
+  let username = req.body.username;
+  let password = req.body.password;
+  if (name && username && password) {
+    connection.query('insert into user (name, username, password) values(?,?,?)', [name, username, password], (err, rows) => {
+      if (err) throw err;
+      res.header({'Access-Control-Allow-Origin': '*'}).json(rows);
+    });
+  } else {
+    res.sendStatus(500);
+  }
+});
+
+app.options('/*', (req, res) => {
+  res.header({
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
+  }).end();
 });
 
 // connection.end();

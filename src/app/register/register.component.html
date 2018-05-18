@@ -1,27 +1,27 @@
 <div class="formContainer">
-  <h1>User Registration</h1>
+  <h5>User Registration</h5>
 
-  <form action="register.component.ts">
+  <form action="register.component.ts" autocomplete="on">
     <label>
       <span>Name:</span>
-      <input type="text" name="name">
+      <input type="text" name="name" [(ngModel)]="user.name">
     </label>
     <label>
       <span>Username:</span>
-      <input type="text" name="username">
+      <input type="text" name="username" [(ngModel)]="user.username">
     </label>
     <label>
       <span>Password:</span>
-      <input type="password" name="password">
+      <input type="password" name="new-password" #password [(ngModel)]="user.password">
     </label>
     <label>
       <span>Confirm Password:</span>
-      <input type="password" name="confirm">
+      <input type="password" name="new-password-confirm" #confirm>
     </label>
     <div class="buttonContainer">
       <div>
         <input type="button" (click)="goBack();" value="Return"/>
-        <input type="submit" value="Sign Up">
+        <input type="submit" value="Sign Up" (click)="signUp();">
       </div>
     </div>
 

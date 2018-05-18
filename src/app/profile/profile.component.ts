@@ -55,8 +55,7 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteCity(cityId: string) {
-    console.log(cityId);
-    this.http.options(`http://localhost:3000/city?cid=${cityId}`).subscribe(
+    this.http.delete(`http://localhost:3000/city?cid=${cityId}`).subscribe(
       x => {
         this.getCities();
       }
