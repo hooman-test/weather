@@ -85,6 +85,26 @@ app.post('/user', (req, res, next) => {
   }
 });
 
+app.post('/user/login', (req, res) => {
+  let user = req.body.username;
+  let pass = req.body.password;
+
+  if (!(user && pass)) {
+    res.sendStatus(400);
+  } else {
+    connection.query('select * from user where username = ? and password = ?', [user, pass], (err, rows) => {
+      if (err) throw err;
+      if (rows.length > 1) {
+        resSendStatus(500);
+      } else if (rows.length < 1) {
+        res.sendStatus(404);
+      } else if (rows.length === 1) {
+        res.json(rows);
+      }
+    })
+  }
+});
+
 app.options('/*', (req, res) => {
   res.header({
     'Access-Control-Allow-Origin': '*',

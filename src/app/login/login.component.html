@@ -4,19 +4,19 @@
     <div>
       <label>
         <span>Username:</span>
-        <input type="text" name="username">
+        <input type="text" name="username" #user>
       </label>
     </div>
     <div>
       <label>
         <span>Password:</span>
-        <input type="password" name="password">
+        <input type="password" name="password" #pass>
       </label>
     </div>
     <div class="buttonContainer">
       <div>
         <input type="button" value="Register" routerLink="/register"/>
-        <input type="submit" value="Login" routerLink="/user/hooman">
+        <input type="submit" value="Login" (click)="login(user.value, pass.value);">
       </div>
     </div>
   </form>
