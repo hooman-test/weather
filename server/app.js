@@ -29,8 +29,12 @@ const connection = mysql.createConnection({
 });
 
 connection.connect();
-
 app.use((req, res, next) => {
+  res.header({
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
+  });
   next();
 });
 
@@ -38,7 +42,7 @@ app.get('/cities', (req, res) => {
   let user_id = req.query.uid;
   connection.query('select * from city where user_id = ?', [user_id], (err, rows) => {
     if (err) throw err;
-    res.header({'Access-Control-Allow-Origin': '*'}).json(rows);
+    res.json(rows);
   })
 });
 
@@ -46,7 +50,7 @@ app.post('/city', (req, res) => {
   let city_id = req.query.cid;
   connection.query('insert into city (id, user_id) values (?,?)', [city_id, 1], (err, rows) => {
     if (err) throw err;
-    res.header({'Access-Control-Allow-Origin': '*'}).json(rows);
+    res.json(rows);
   })
 });
 
@@ -54,21 +58,30 @@ app.delete('/city', (req, res) => {
   let city_id = req.query.cid;
   connection.query('delete from city where user_id = 1 and id = ?', [city_id], (err, rows) => {
     if (err) throw err;
-    res.header({'Access-Control-Allow-Origin': '*'}).json(rows);
+    res.json(rows);
   })
 });
 
-app.post('/user', (req, res) => {
+app.post('/user', (req, res, next) => {
   let name = req.body.name;
   let username = req.body.username;
   let password = req.body.password;
-  if (name && username && password) {
-    connection.query('insert into user (name, username, password) values(?,?,?)', [name, username, password], (err, rows) => {
-      if (err) throw err;
-      res.header({'Access-Control-Allow-Origin': '*'}).json(rows);
-    });
+
+  if (!(name && username && password)) {
+    res.sendStatus(400);
   } else {
-    res.sendStatus(500);
+    connection.query('select * from user where username=?', [username], (err, rows) => {
+      if (err) throw err;
+      if (rows.length > 0) {
+        res.sendStatus(403);
+      }
+      else {
+        connection.query('insert into user (name, username, password) values(?,?,?)', [name, username, password], (err, rows) => {
+          if (err) throw err;
+          res.json(rows);
+        });
+      }
+    });
   }
 });
 

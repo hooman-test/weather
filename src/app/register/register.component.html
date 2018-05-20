@@ -1,22 +1,20 @@
 <div class="formContainer">
+  <div class="info" *ngIf="msg">{{msg}}</div>
+  <div class="error" *ngIf="errorMsg">{{errorMsg}}</div>
   <h5>User Registration</h5>
 
   <form action="register.component.ts" autocomplete="on">
     <label>
       <span>Name:</span>
-      <input type="text" name="name" [(ngModel)]="user.name">
+      <input type="text" required="required" name="name" [(ngModel)]="user.name">
     </label>
     <label>
       <span>Username:</span>
-      <input type="text" name="username" [(ngModel)]="user.username">
+      <input type="text" required="required" name="username" [(ngModel)]="user.username">
     </label>
     <label>
       <span>Password:</span>
-      <input type="password" name="new-password" #password [(ngModel)]="user.password">
-    </label>
-    <label>
-      <span>Confirm Password:</span>
-      <input type="password" name="new-password-confirm" #confirm>
+      <input type="password" required="required" name="new-password" #password [(ngModel)]="user.password">
     </label>
     <div class="buttonContainer">
       <div>

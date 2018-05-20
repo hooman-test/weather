@@ -32,3 +32,19 @@ div.buttonContainer div {
 input[type=submit], input[type=button] {
   width: 80px;
 }
+
+.info {
+  color: green;
+  background-color: #c1eebe;
+  border: 1px solid darkgreen;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.error {
+  color: #bf271e;
+  background-color: #ffd3d1;
+  border: 1px solid darkred;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
