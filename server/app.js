@@ -99,7 +99,7 @@ app.post('/user/login', (req, res) => {
       } else if (rows.length < 1) {
         res.sendStatus(404);
       } else if (rows.length === 1) {
-        res.json(rows);
+        res.json(rows[0].name);
       }
     })
   }

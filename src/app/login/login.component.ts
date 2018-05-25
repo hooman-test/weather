@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Location} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +9,7 @@ import {Location} from '@angular/common';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private http: HttpClient, private location: Location) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   ngOnInit() {
@@ -20,9 +20,9 @@ export class LoginComponent implements OnInit {
     headers.append('Content-Type', 'application/json');
 
     this.http.post('http://localhost:3000/user/login', {'username': user, 'password': pass}, {headers: headers}).subscribe(
-      data => {
-        console.log(`/user/${data[0].username}`);
-        this.location.forward();
+      name => {
+        sessionStorage.setItem('name', name.toString());
+        this.router.navigateByUrl(`/user/${user}`);
       }
     );
   }
