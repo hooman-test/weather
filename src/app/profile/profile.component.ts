@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {WeatherService} from '../weather.service';
+import {Router} from '@angular/router';
+import {WeatherService} from '../service/weather/weather.service';
 import {CityWeatherDto} from '../cityWeatherDto';
 import {HttpClient} from '@angular/common/http';
 
@@ -14,28 +14,35 @@ export class ProfileComponent implements OnInit {
   username: string;
   cityWeatherDto: CityWeatherDto;
 
-  constructor(private route: ActivatedRoute, private ws: WeatherService, private http: HttpClient) {
+  constructor(private router: Router, private ws: WeatherService, private http: HttpClient) {
   }
 
   ngOnInit() {
-    this.username = this.route.snapshot.paramMap.get('username');
+    this.username = sessionStorage.getItem('username');
+    if (!this.username) {
+      this.signOut();
+    }
     this.getCities();
   }
 
   getCities() {
     const ids = [];
-    this.http.get('http://localhost:3000/cities?uid=1').subscribe(
+    this.http.get(`http://localhost:3000/cities?username=${sessionStorage.getItem('username')}`).subscribe(
       cityIdObj => {
-        Object.values(cityIdObj).forEach(x => {
-          ids.push(x.id);
-        });
-        this.ws.getWeatherByCities(ids).subscribe(
-          data => {
-            this.cityWeatherDtos = data['list'];
-          }, err => {
-            console.log(err);
-          }
-        );
+        if (Object.values(cityIdObj).length > 0) {
+          Object.values(cityIdObj).forEach(x => {
+            ids.push(x.id);
+          });
+          this.ws.getWeatherByCities(ids).subscribe(
+            data => {
+              this.cityWeatherDtos = data['list'];
+            }, err => {
+              console.log(err);
+            }
+          );
+        } else {
+          this.cityWeatherDtos = null;
+        }
       }
     );
   }
@@ -47,18 +54,24 @@ export class ProfileComponent implements OnInit {
         this.cityWeatherDto.main = data['main'];
         this.cityWeatherDto.name = data['name'];
         const cid = data['id'];
-        this.http.post(`http://localhost:3000/city?cid=${cid}`, null).subscribe(
-          x => {
+        this.http.post(`http://localhost:3000/city?cid=${cid}&username=${sessionStorage.getItem('username')}`, null).subscribe(
+          () => {
             this.getCities();
           });
       });
   }
 
   deleteCity(cityId: string) {
-    this.http.delete(`http://localhost:3000/city?cid=${cityId}`).subscribe(
-      x => {
+    this.http.delete(`http://localhost:3000/city?cid=${cityId}&username=${sessionStorage.getItem('username')}`).subscribe(
+      () => {
         this.getCities();
       }
     );
+  }
+
+  signOut() {
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('name');
+    this.router.navigate(['/']);
   }
 }

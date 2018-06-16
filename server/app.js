@@ -39,8 +39,8 @@ app.use((req, res, next) => {
 });
 
 app.get('/cities', (req, res) => {
-  let user_id = req.query.uid;
-  connection.query('select * from city where user_id = ?', [user_id], (err, rows) => {
+  let username = req.query.username;
+  connection.query('select u.id as user_id, c.id as id from city c inner join user u on c.user_id = u.id where u.username = ?', [username], (err, rows) => {
     if (err) throw err;
     res.json(rows);
   })
@@ -48,18 +48,28 @@ app.get('/cities', (req, res) => {
 
 app.post('/city', (req, res) => {
   let city_id = req.query.cid;
-  connection.query('insert into city (id, user_id) values (?,?)', [city_id, 1], (err, rows) => {
+  let username = req.query.username;
+  connection.query('select u.id from user u where u.username = ?', [username], (err, rows) => {
     if (err) throw err;
-    res.json(rows);
-  })
+    const user_id = rows[0].id;
+    connection.query('insert into city (id, user_id) values (?,?)', [city_id, user_id], (err, rows) => {
+      if (err) throw err;
+      res.json(rows);
+    })
+  });
 });
 
 app.delete('/city', (req, res) => {
   let city_id = req.query.cid;
-  connection.query('delete from city where user_id = 1 and id = ?', [city_id], (err, rows) => {
+  let username = req.query.username;
+  connection.query('select u.id from user u where u.username = ?', [username], (err, rows) => {
     if (err) throw err;
-    res.json(rows);
-  })
+    const user_id = rows[0].id;
+    connection.query('delete from city where id = ? and user_id = ?', [city_id, user_id], (err, rows) => {
+      if (err) throw err;
+      res.json(rows);
+    });
+  });
 });
 
 app.post('/user', (req, res, next) => {
@@ -115,8 +125,10 @@ app.options('/*', (req, res) => {
 
 // connection.end();
 
+/*
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+*/
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

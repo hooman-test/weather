@@ -9,3 +9,21 @@
   padding: 0 20px 10px;
   margin: 10px 0;
 }
+
+.info {
+  font-size: small;
+  color: green;
+}
+
+
+.label {
+  font-size: 12px;
+}
+
+.value {
+  color: blue;
+}
+
+.buttonContainer {
+  padding: 10px 0;
+}

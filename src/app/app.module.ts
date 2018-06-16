@@ -5,12 +5,13 @@ import {FormsModule} from '@angular/forms';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {WeatherLookupComponent} from './weather-lookup/weather-lookup.component';
-import {WeatherService} from './weather.service';
+import {WeatherService} from './service/weather/weather.service';
 import {LoginComponent} from './login/login.component';
 import {AppRoutingModule} from './app-routing.module';
 import {RegisterComponent} from './register/register.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {ProfileComponent} from './profile/profile.component';
+import {AuthService} from './service/auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import {ProfileComponent} from './profile/profile.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [WeatherService],
+  providers: [WeatherService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

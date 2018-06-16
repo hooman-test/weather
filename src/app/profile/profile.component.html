@@ -1,18 +1,25 @@
-<h4>Welcome {{username}}</h4>
+<h4>Welcome {{username}} <a (click)="signOut()" href="#">(Sign Out)</a></h4>
 <h5>City List</h5>
 <div class="sectionWrapper">
-  <div *ngFor="let item of cityWeatherDtos" class="section">
-    <h5 class="cityName">{{item.name}}:</h5>
-    <div>
-      <span class="label">Temp: </span><span class="value">{{item.main.temp}}</span>&#8451;
+  <div *ngIf="cityWeatherDtos">
+    <div *ngFor="let item of cityWeatherDtos" class="section">
+      <h5 class="cityName">{{item.name}}:</h5>
+      <div>
+        <span class="label">Temp: </span><span class="value">{{item.main.temp}}</span>&#8451;
+      </div>
+      <div>
+        <span class="label">Max Temp: </span><span class="value">{{item.main.temp_max}}</span>&#8451;
+      </div>
+      <div>
+        <span class="label">Min Temp: </span><span class="value">{{item.main.temp_min}}</span>&#8451;
+      </div>
+      <div class="buttonContainer">
+        <button (click)="deleteCity(item.id)">Remove</button>
+      </div>
     </div>
-    <div>
-      <span class="label">Max Temp: </span><span class="value">{{item.main.temp_max}}</span>&#8451;
-    </div>
-    <div>
-      <span class="label">Min Temp: </span><span class="value">{{item.main.temp_min}}</span>&#8451;
-    </div>
-    <button (click)="deleteCity(item.id)">Remove</button>
+  </div>
+  <div *ngIf="!cityWeatherDtos" class="info">
+    You haven't added any city. Please add it first.
   </div>
 </div>
 

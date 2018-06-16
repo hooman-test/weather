@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import {WeatherCondition} from './weatherCondition';
-import {CityWeatherDto} from './cityWeatherDto';
+import {WeatherCondition} from '../../weatherCondition';
+import {CityWeatherDto} from '../../cityWeatherDto';
 
 @Injectable()
 export class WeatherService {
