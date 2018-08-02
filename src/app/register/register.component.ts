@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
 import {User} from '../user';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,7 @@ export class RegisterComponent implements OnInit {
   msg = '';
   errorMsg = '';
 
-  constructor(private location: Location, private http: HttpClient) {
+  constructor(private location: Location, private http: HttpClient, private router: Router) {
   }
 
   ngOnInit() {
@@ -34,8 +35,11 @@ export class RegisterComponent implements OnInit {
     this.http.post('http://localhost:3000/user', {'name': this.user.name, 'username': this.user.username, 'password': this.user.password},
       {headers: headers}).subscribe(
       x => {
-        this.msg = `${this.user.name} has added.`;
+        this.msg = `${this.user.name} added.`;
         this.errorMsg = '';
+        sessionStorage.setItem('name', this.user.name);
+        sessionStorage.setItem('username', this.user.username);
+        this.router.navigateByUrl(`/user/${this.user.username}`);
       }, err => {
         if (err.status === 400) {
           this.msg = '';
