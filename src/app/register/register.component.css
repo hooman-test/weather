@@ -19,6 +19,11 @@ form label span {
   display: inline-block;
 }
 
+input[type='text'], input[type='password'] {
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
 div.buttonContainer {
   margin: 20px 0;
   text-align: right;
@@ -47,4 +52,24 @@ input[type=submit], input[type=button] {
   border: 1px solid darkred;
   border-radius: 5px;
   padding: 5px 10px;
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #51c957; /* green */
+  background-color: transparent !important;
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #d13439; /* red */
+  background-color: transparent !important;
+}
+
+.alert {
+  color: #d43427;
+  font-size: small;
+  position: relative;
+  left: 160px;
+  padding: 0 0 5px 20px;
+  width: 190px;
+  background: transparent url('../../assets/error_validation.png') no-repeat top left;
 }

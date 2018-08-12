@@ -57,6 +57,11 @@ input[type=submit] {
   min-width: 70px;
 }
 
+input[type=submit]:disabled {
+  background-color: #aaaaaa !important;
+  color: #E6E6E6;
+}
+
 input[type=button] {
   background-color: whitesmoke;
   color: #555555;

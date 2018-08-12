@@ -3,23 +3,49 @@
   <div class="error" *ngIf="errorMsg">{{errorMsg}}</div>
   <h5>User Registration</h5>
 
-  <form action="register.component.ts" autocomplete="on">
+  <form #registerForm="ngForm" action="register.component.ts">
     <label>
       <span>Name:</span>
-      <input type="text" required="required" name="name" [(ngModel)]="user.name">
+      <input type="text" required name="name" [(ngModel)]="user.name" #name="ngModel" minlength="3" maxlength="40">
     </label>
+    <div *ngIf="name.invalid && name.dirty">
+      <div *ngIf="name.errors.required" class="alert">
+        Name is required!
+      </div>
+      <div *ngIf="name.errors.minlength" class="alert">
+        Name should be at least 3 characters long!
+      </div>
+    </div>
     <label>
       <span>Username:</span>
-      <input type="text" required="required" name="username" [(ngModel)]="user.username">
+      <input type="text" required name="username" [(ngModel)]="user.username" #username="ngModel" minlength="4"
+             maxlength="40">
     </label>
+    <div *ngIf="username.invalid && username.dirty">
+      <div *ngIf="username.errors.required" class="alert">
+        Username is required!
+      </div>
+      <div *ngIf="username.errors.minlength" class="alert">
+        Username should be at least 4 characters long!
+      </div>
+    </div>
     <label>
       <span>Password:</span>
-      <input type="password" required="required" name="new-password" #password [(ngModel)]="user.password">
+      <input type="password" required name="password" [(ngModel)]="user.password" #password="ngModel" minlength="6"
+             maxlength="40">
     </label>
+    <div *ngIf="password.invalid && password.dirty">
+      <div *ngIf="password.errors.required" class="alert">
+        Password is required!
+      </div>
+      <div *ngIf="password.errors.minlength" class="alert">
+        Password should be at least 6 characters long!
+      </div>
+    </div>
     <div class="buttonContainer">
       <div>
         <input type="button" (click)="goBack();" value="Return"/>
-        <input type="submit" value="Sign Up" (click)="signUp();">
+        <input type="submit" value="Sign Up" (click)="signUp();" [disabled]="!registerForm.form.valid">
       </div>
     </div>
 
