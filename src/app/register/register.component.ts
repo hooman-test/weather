@@ -17,6 +17,8 @@ export class RegisterComponent implements OnInit {
   };
   msg = '';
   errorMsg = '';
+  namePattern = '^[a-zA-Z ]+$';
+  usernamePattern = '^([a-zA-Z]+\\d*){4,}$';
 
   constructor(private location: Location, private http: HttpClient, private router: Router) {
   }

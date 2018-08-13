@@ -6,27 +6,34 @@
   <form #registerForm="ngForm" action="register.component.ts">
     <label>
       <span>Name:</span>
-      <input type="text" required name="name" [(ngModel)]="user.name" #name="ngModel" minlength="3" maxlength="40">
+      <input type="text" required name="name" [(ngModel)]="user.name" #name="ngModel" minlength="3" maxlength="40"
+             [pattern]="namePattern">
     </label>
     <div *ngIf="name.invalid && name.dirty">
       <div *ngIf="name.errors.required" class="alert">
         Name is required!
       </div>
-      <div *ngIf="name.errors.minlength" class="alert">
+      <div *ngIf="name.errors?.minlength" class="alert">
         Name should be at least 3 characters long!
+      </div>
+      <div *ngIf="name.errors?.pattern" class="alert">
+        Name could only contains alphabetic or space characters.
       </div>
     </div>
     <label>
       <span>Username:</span>
       <input type="text" required name="username" [(ngModel)]="user.username" #username="ngModel" minlength="4"
-             maxlength="40">
+             maxlength="40" [pattern]="usernamePattern">
     </label>
     <div *ngIf="username.invalid && username.dirty">
       <div *ngIf="username.errors.required" class="alert">
         Username is required!
       </div>
-      <div *ngIf="username.errors.minlength" class="alert">
+      <div *ngIf="username.errors?.minlength" class="alert">
         Username should be at least 4 characters long!
+      </div>
+      <div *ngIf="username.errors?.pattern" class="alert">
+        Username should start with a character and could only contains alphanumerics.
       </div>
     </div>
     <label>
