@@ -54,9 +54,11 @@ export class ProfileComponent implements OnInit {
         this.cityWeatherDto.main = data['main'];
         this.cityWeatherDto.name = data['name'];
         const cid = data['id'];
-        this.http.post(`http://localhost:3000/city?cid=${cid}&username=${sessionStorage.getItem('username')}`, null).subscribe(
+        this.http.post(`http://localhost:3000/city`, {cid, username: sessionStorage.getItem('username')}).subscribe(
           () => {
             this.getCities();
+          }, error => {
+            console.log('Error returned: ' + error.message);
           });
       });
   }

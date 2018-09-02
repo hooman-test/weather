@@ -27,14 +27,17 @@ const connection = mysql.createConnection({
   password: 'hooman',
   database: 'my_db'
 });
+const myHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': '*'
+  // 'Access-Control-Request-Headers': '*'
+  // 'Access-Control-Request-Method': 'GET'
+};
 
 connection.connect();
 app.use((req, res, next) => {
-  res.header({
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-  });
+  res.header(myHeaders);
   next();
 });
 
@@ -47,8 +50,8 @@ app.get('/cities', (req, res) => {
 });
 
 app.post('/city', (req, res) => {
-  let city_id = req.query.cid;
-  let username = req.query.username;
+  let city_id = req.body.cid;
+  let username = req.body.username;
   connection.query('select u.id from user u where u.username = ?', [username], (err, rows) => {
     if (err) throw err;
     const user_id = rows[0].id;
@@ -116,11 +119,7 @@ app.post('/user/login', (req, res) => {
 });
 
 app.options('/*', (req, res) => {
-  res.header({
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-  }).end();
+  res.header(myHeaders).end();
 });
 
 // connection.end();
