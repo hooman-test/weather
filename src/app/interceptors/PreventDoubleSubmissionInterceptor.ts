@@ -1,6 +1,6 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {EMPTY, Observable} from 'rxjs';
-import {AES} from 'crypto-ts';
+import {HashUtil} from '../utility/hash.util';
 
 const sessionStorageParamName = 'savedRequests';
 
@@ -12,11 +12,22 @@ export class PreventDoubleSubmissionInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (req.method === 'POST') {
+      const hashUtility = new HashUtil();
+      const bodyParams = req.serializeBody().toString();
+
+      console.log('first');
+
+      let hashedBodyParams;
+      hashUtility.getSha256(bodyParams).then((h) =>
+        hashedBodyParams = h
+      );
+
+      console.log('second');
+      console.log(bodyParams);
+      console.log(hashedBodyParams);
       // Encrypt body parameters to store in sessionStorage
-      // const encryptedBodyParams = AES.encrypt(JSON.stringify(req.body), 'test').toString();
-      const encryptedBodyParams = JSON.stringify(req.body);
       const currentData = {
-        hash: encryptedBodyParams,
+        hash: hashedBodyParams,
         date: Date.now()
       };
 
@@ -26,7 +37,7 @@ export class PreventDoubleSubmissionInterceptor implements HttpInterceptor {
       } else {
         const now = Date.now();
         for (const obj of decryptedDataArray) {
-          if ((obj.hash === encryptedBodyParams) && (now - obj.date < postDataDurationMin * 1000)) {
+          if ((obj.hash === hashedBodyParams) && (now - obj.date < postDataDurationMin * 1000)) {
             console.log('Double Submission Detected!');
             return EMPTY;
           }
@@ -35,6 +46,7 @@ export class PreventDoubleSubmissionInterceptor implements HttpInterceptor {
       decryptedDataArray.push(currentData);
       sessionStorage.setItem(sessionStorageParamName, JSON.stringify(decryptedDataArray));
     }
+    console.log('third');
     return next.handle(req);
   }
 }
