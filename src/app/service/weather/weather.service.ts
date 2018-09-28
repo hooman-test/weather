@@ -14,7 +14,6 @@ export class WeatherService {
 
   getWeatherByCity(cityName: string): Observable<WeatherCondition> {
     const query = this.url + '&q=' + cityName;
-    console.log('query is: ' + query);
     return this.http.get<WeatherCondition>(query);
   }
 

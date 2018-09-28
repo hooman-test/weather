@@ -22,6 +22,12 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('name', name.toString());
         sessionStorage.setItem('username', user);
         this.router.navigateByUrl(`/user/${user}`);
+      }, error => {
+        if (error.message === 'DUPLICATE_REQUEST') {
+          console.log('Duplicated Requests Found');
+        } else {
+          console.error(error.message);
+        }
       });
   }
 }

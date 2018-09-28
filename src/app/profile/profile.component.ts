@@ -58,7 +58,11 @@ export class ProfileComponent implements OnInit {
           () => {
             this.getCities();
           }, error => {
-            console.log('Error returned: ' + error.message);
+            if (error.message === 'DUPLICATE_REQUEST') {
+              console.log('Duplicated Requests Found');
+            } else {
+              console.error('Error returned: ' + error.message);
+            }
           });
       });
   }
