@@ -69,7 +69,7 @@ app.delete('/city', (req, res) => {
     if (err) throw err;
     const user_id = rows[0].id;
     connection.query('delete from city where id = ? and user_id = ?', [city_id, user_id], (err, rows) => {
-      if (err) throw err;
+      // if (err) throw err;
       res.json(rows);
     });
   });

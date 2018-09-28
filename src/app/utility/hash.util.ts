@@ -11,6 +11,11 @@ export class HashUtil {
     return buf;
   }
 
+  static buffer2String(buf) {
+    return buf.toString();
+    // return String.fromCharCode.apply(null, new Uint16Array(buf));
+  }
+
   async getSha256(message: string) {
 
     // encode as UTF-8

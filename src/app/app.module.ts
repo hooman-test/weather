@@ -13,6 +13,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {ProfileComponent} from './profile/profile.component';
 import {AuthService} from './service/auth/auth.service';
 import {PreventDoubleSubmissionInterceptor} from './interceptors/PreventDoubleSubmissionInterceptor';
+import {LoggingInterceptor} from './interceptors/LoggingInterceptor';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {PreventDoubleSubmissionInterceptor} from './interceptors/PreventDoubleSu
   providers: [
     WeatherService,
     AuthService,
-    {provide: HTTP_INTERCEPTORS, useClass: PreventDoubleSubmissionInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: PreventDoubleSubmissionInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

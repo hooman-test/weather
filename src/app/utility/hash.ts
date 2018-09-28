@@ -30,7 +30,7 @@ export class HashUtility {
     return hexCodes.join('');
   }
 
-  getSha256(str: string): any {
+  static getSha256(str: string): any {
     // We transform the string into an arrayBuffer.
     const buffer = HashUtility.string2Buffer(str);
     return crypto.subtle.digest('SHA-256', buffer).then(hash => {
