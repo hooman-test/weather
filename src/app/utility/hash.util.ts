@@ -17,10 +17,21 @@ export class HashUtil {
     const msgBuffer = HashUtil.string2Buffer(message);
 
     // hash the message
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const cryptoObj = window.crypto || window['msCrypto']; // for IE 11
+    let hashBuffer = await cryptoObj.subtle.digest('SHA-256', msgBuffer);
+
+    const isIE = /msie\s|trident\//i.test(window.navigator.userAgent);
+    if (isIE) {
+      hashBuffer = hashBuffer['result']; // ie hack, because of old crypto api in ie11
+    }
 
     // convert ArrayBuffer to Array
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    let hashArray;
+    try {
+      hashArray = Array.from(new Uint8Array(hashBuffer));
+    } catch (e) {
+      throw Error('Can not build hashArray from: ' + hashBuffer);
+    }
 
     // convert bytes to hex string
     return hashArray.map(b => ('00' + b.toString(16)).slice(-2)).join('');
