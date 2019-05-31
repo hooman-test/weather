@@ -3,6 +3,7 @@
   width: 46%;
 
 }
+
 .section {
   border: 1px solid #cccccc;
   background-color: white;
@@ -26,4 +27,10 @@
 
 .buttonContainer {
   padding: 10px 0;
+}
+
+form input[type=submit] {
+  margin: 0 10px;
+  height: 25px;
+
 }

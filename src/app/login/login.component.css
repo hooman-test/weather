@@ -22,3 +22,7 @@ div.buttonContainer {
 div.buttonContainer div {
   display: inline-block;
 }
+
+div.buttonContainer input {
+  margin-left: 10px;
+}
