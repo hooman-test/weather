@@ -24,7 +24,7 @@ const mysql = require('mysql');
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'hooman',
+  password: 'Hooman123456',
   database: 'my_db'
 });
 const myHeaders = {
