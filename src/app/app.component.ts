@@ -6,7 +6,6 @@ import {Component, Injectable, OnInit} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 
-@Injectable()
 export class AppComponent implements OnInit {
   title = 'Weather Portal';
 
