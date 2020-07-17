@@ -6,10 +6,8 @@ function register(method, url, fn) {
 
 function handler(req, res) {
   let matchedRoutes = routes.filter((route) => {
-    if ((route.url == req.url || route.url == null) && (route.method == req.method || route.method == null)) {
-      return true;
-    }
-    return false;
+    return (route.url === req.url || route.url == null) && (route.method === req.method || route.method == null);
+
   });
   console.log(matchedRoutes);
   matchedRoutes.some((r) => r.fn(req, res));
